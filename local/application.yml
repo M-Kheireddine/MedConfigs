@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    config:
+      enabled: true
+    discovery:
+      enabled: true
+
+server:
+  servlet:
+    context-path: /api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, refresh
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka}
