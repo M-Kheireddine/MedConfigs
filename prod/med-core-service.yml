@@ -1,6 +1,8 @@
 spring:
-  mongodb:
-    uri: mongodb://MED_CORE_USER:MED_CORE_PASSWORD@localhost:27017/MED_CORE_DB?authSource=admin
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://MED_CORE_USER:MED_CORE_PASSWORD@mongo:27017/MED_CORE_DB?authSource=admin}
+      auto-index-creation: true
 
 server:
   port: 8083
