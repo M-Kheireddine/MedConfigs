@@ -1,2 +1,33 @@
 server:
   port: 8085
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:29092}
+    consumer:
+      group-id: med-notification-group
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: tn.iteam.mednotificationservice.dtos.events.NotificationEvent
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: ${MAIL_SMTP_AUTH:false}
+          starttls:
+            enable: ${MAIL_SMTP_STARTTLS:false}
+
+medback:
+  kafka:
+    topics:
+      appointment: appointment_topic
+      prescription: prescription_topic
+  mail:
+    from: ${MAIL_FROM:no-reply@medback.local}
+    simulation-enabled: ${MAIL_SIMULATION_ENABLED:true}
