@@ -1,6 +1,47 @@
 spring:
   main:
     web-application-type: reactive
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+          default-filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin RETAIN_FIRST
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins:
+                  - ${FRONTEND_ORIGIN:http://localhost:4200}
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders:
+                  - "*"
+                allowCredentials: true
+          routes:
+            - id: med-user-service
+              uri: lb://med-user-service
+              predicates:
+                - Path=/api/v1/auth/**,/api/v1/users/**,/api/v1/admin/**
+            - id: med-core-service
+              uri: lb://med-core-service
+              predicates:
+                - Path=/api/v1/medications/**,/api/v1/public/medications/**,/api/v1/appointments/**,/api/v1/prescriptions/**
+            - id: med-chatboot-service
+              uri: lb://med-chatboot-service
+              predicates:
+                - Path=/api/v1/chat/**
+            - id: med-notification-service
+              uri: lb://med-notification-service
+              predicates:
+                - Path=/api/v1/notifications/**
 
 server:
   port: 8080
