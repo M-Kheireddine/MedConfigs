@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/MED_USER_DB
-    username: postgres
-    password: MED_USER_PASSWORD
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/MED_USER_DB}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:MED_USER_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -12,6 +12,12 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+medback:
+  security:
+    jwt:
+      secret: ${JWT_SECRET:medback-jwt-secret-key-for-development-only-please-change}
+      expiration-minutes: ${JWT_EXPIRATION_MINUTES:1440}
 
 server:
   port: 8081
