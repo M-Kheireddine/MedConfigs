@@ -13,7 +13,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, refresh
+        include: health, info, gateway, metrics, prometheus
 
 eureka:
   client:

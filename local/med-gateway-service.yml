@@ -43,5 +43,14 @@ spring:
               predicates:
                 - Path=/api/v1/notifications/**
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, gateway, metrics, prometheus
+  endpoint:
+    gateway:
+      access: read-only
+
 server:
   port: 8080

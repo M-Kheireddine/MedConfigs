@@ -4,10 +4,11 @@ server:
 spring:
   ai:
     openai:
-      api-key: ${OPENAI_API_KEY:key_whcap3gmiri90SMe}
+      api-key: ${OPENAI_API_KEY:}
       chat:
-        model: ${OPENAI_CHAT_MODEL:gpt-4o-mini}
-        temperature: ${OPENAI_CHAT_TEMPERATURE:0.2}
+        options:
+          model: ${OPENAI_CHAT_MODEL:gpt-4o-mini}
+          temperature: ${OPENAI_CHAT_TEMPERATURE:0.2}
 
 medback:
   chatbot:
